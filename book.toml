@@ -1,0 +1,6 @@
+[book]
+authors = ["Tommy @ Degino Inc."]
+language = "ja"
+multilingual = false
+src = "src"
+title = "Refactoring Catalog"
