@@ -24,7 +24,7 @@ function adhoc() {
 
 ``` js
 // プロダクトコード gen1
-function adhoc(value=0) { // <- 仮引数をデフォルト付きで追加します。
+function adhoc(value=0) {   // <- 仮引数をデフォルト付きで追加します。
   return 0
 }
 ```
@@ -32,7 +32,7 @@ function adhoc(value=0) { // <- 仮引数をデフォルト付きで追加しま
 ``` js
 // プロダクトコード gen2
 function adhoc(value=0) {
-  return value            // <-　仮引数を使うように変えます。
+  return value              // <-　仮引数を使うように変えます。
 }
 ```
 
@@ -49,7 +49,7 @@ it('0 を返すこと', () => {
   expect(adhoc(0)).toBe(0)
 })
 it('1 を返すこと', () => {    // <- 引数が使われていることを確認するテストを追加します。
-  expect(adhoc(0)).toBe(1)  // <- エラーになるコードを書きます。
+  expect(adhoc(0)).toBe(1)  // <- エラーになるコードを書きます。 (三角測量)
 })
 ```
 
@@ -76,6 +76,7 @@ function adhoc(value) {     // <-　デフォルト値を消します。
 
 ``` js
 // テストコード org
+// FIXME: 正方形の事例は、そもそも自明過ぎ。よい事例を考え中…。
 it('正方形の面積を求める', () => {
   expect(space(5, 5)).toBe(25)
 })
