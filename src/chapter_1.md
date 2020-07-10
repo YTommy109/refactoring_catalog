@@ -16,17 +16,17 @@ function menseki(v) {
 
 ```js
 // 定数を切り出す
-function menseki(v) {
+function menseki(r) {
   const pi = 3.14       // <- 変数を用意する
-  return v*v*pi         // <- 変数を利用する
+  return r*r*pi         // <- 変数を利用する
 }
 ```
 
 ```js
 // 式を切り出す
-function menseki(v) {
+function menseki(r) {
   const pi = 3.14
-  const ret = v*v*pi    // <- 式を変数に入れる
+  const ret = r*r*pi    // <- 式を変数に入れる
   return ret            // <- 変数を利用する
 }
 ```
@@ -34,9 +34,9 @@ function menseki(v) {
 ### 1.2. 変数のインライン化
 
 ```js
-function menseki(v) {
+function menseki(r) {
   //const pi = 3.14       // 消す
-  const ret = v*v*3.14    // pi をインライン化する
+  const ret = r*r*3.14    // pi をインライン化する
   return ret
 }
 ```
