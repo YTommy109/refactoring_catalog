@@ -156,6 +156,6 @@ function zero() {
 // }                    //
 
 function zero() {
-  return 0。
+  return 0
 }
 ```
