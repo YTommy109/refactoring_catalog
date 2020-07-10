@@ -88,3 +88,67 @@ function space(width, height) {
 }
 ```
 
+### 関数の統合
+
+```js
+// テストコード org
+it('5 倍になること', () => {
+  expect(raise5(2)).toBe(10)
+})
+it('10 倍になること', () => {
+  expect(raise10(2)).toBe(20)
+})
+```
+
+```js
+// プロダクトコード org
+function raise5(value) {
+  return value * 5
+}
+function raise10(value) {
+  return value * 10
+}
+```
+
+```js
+// プロダクトコード gen_01
+function raise5(value) {
+  const multiplier = 5                   // <- ローカル変数の導出
+  return value * multiplier              // <-
+}
+function raise10(value) {
+  return value * 10
+}
+```
+
+```js
+// プロダクトコード gen_02
+function raise(value, multiplier) {     // <- 関数の導出
+  return value * multiplier             // <-
+}                                       // <-
+function raise5(value) {
+  const multiplier = 5
+  return raise(value, multiplier)       // <-
+}
+function raise10(value) {
+  return riase(value, 10)               // <-
+}
+```
+
+```js
+// テストコード gen_03
+it('5 倍になること', () => {
+  expect(raise(2, 5)).toBe(10)          // <- 導出関数への置き換え
+})
+it('10 倍になること', () => {
+  expect(raise(2, 10)).toBe(20)         // <-
+})
+```
+
+```js
+// プロダクトコード gen_04
+function raise(value, multiplier) {
+  return value * multiplier
+}
+                                        // <- 使わなくなった関数を削除しました
+```
