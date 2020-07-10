@@ -9,8 +9,8 @@
 ## 1.1. ローカル変数導出
 
 ```js
-function menseki(v) {
-  return v*v*3.14
+function menseki(r) {
+  return r*r*3.14
 }
 ```
 
