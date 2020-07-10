@@ -38,8 +38,8 @@ function hoge() {
 ```
 
 ```js
- // gen 2
- // プロダクトコード
+// gen 2
+// プロダクトコード
 function fizz(v) {
   return v===3 ? 'Fizz' : String(v)
 }
@@ -55,8 +55,8 @@ function hoge() {
 ```
 
 ```js
- // gen 3
- // プロダクトコード
+// gen 3
+// プロダクトコード
 function fizz(v) {
   return v===3 ? 'Fizz' : String(v)
 }
@@ -73,8 +73,8 @@ function hoge() {
 ```
 
 ```js
- // gen 4
- // プロダクトコード
+// gen 4
+// プロダクトコード
 function fizz(v) {
   return v===3 ? 'Fizz' : String(v)
 }
@@ -91,8 +91,8 @@ function hoge() {
 ```
 
 ```js
- // gen 5
- // プロダクトコード
+// gen 5
+// プロダクトコード
 function fizz(v) {
   return v===3 ? 'Fizz' : String(v)
 }
@@ -105,8 +105,8 @@ function hoge() {
 ```
 
 ```js
- // gen 6
- // プロダクトコード
+// gen 6
+// プロダクトコード
 function fizz(v) {
   return v===3 ? 'Fizz' : String(v)
 }
