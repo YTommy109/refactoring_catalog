@@ -6,6 +6,12 @@
   - [3.1. FizzBuzz - 1](#31-fizzbuzz---1)
     - [3.1.1. Step 1](#311-step-1)
     - [3.1.2. Step 2](#312-step-2)
+    - [3.1.3. Step 3](#313-step-3)
+    - [3.1.4. Step 4](#314-step-4)
+    - [3.1.5. Step 5](#315-step-5)
+    - [3.1.6. Step 6](#316-step-6)
+    - [3.1.7. Step 7](#317-step-7)
+    - [3.1.8. Step 8](#318-step-8)
 
 <!-- /TOC -->
 
@@ -38,7 +44,7 @@ function hoge() {
 
 ```js
 // プロダクトコード
-function fizz(v) {                    // <- 関数を追加する
+function fizz(v) {                    // <- 関数を追加します
   return v===3 ? 'Fizz' : String(v)   // <-
 }                                     // <-
 
@@ -52,6 +58,8 @@ function hoge() {
 }
 ```
 
+### 3.1.2. Step 2
+
 ```js
 // プロダクトコード
 function fizz(v) {
@@ -61,14 +69,14 @@ function fizz(v) {
 function hoge() {
   const ret = []
   for (let i=1; i<=3; i++) {
-    ret.push(fizz(i))                 // <- 追加した関数に置き換える
+    ret.push(fizz(i))                 // <- 追加した関数に置き換えます
   }
 
   return ret
 }
 ```
 
-### 3.1.2. Step 2
+### 3.1.3. Step 3
 
 ループ処理は for で回すより、 map を使った方がシンプルに記述できます。変えましょう。
 
@@ -88,6 +96,8 @@ function hoge() {
 }
 ```
 
+### 3.1.4. Step 4
+
 ```js
 // プロダクトコード
 function fizz(v) {
@@ -104,6 +114,8 @@ function hoge() {
   return ret
 }
 ```
+
+### 3.1.5. Step 5
 
 ```js
 // プロダクトコード
@@ -122,6 +134,8 @@ function hoge() {
 }
 ```
 
+### 3.1.6. Step 6
+
 ```js
 // プロダクトコード
 function fizz(v) {
@@ -137,6 +151,8 @@ function hoge() {
 }
 ```
 
+### 3.1.7. Step 7
+
 ```js
 // プロダクトコード
 function fizz(v) {
@@ -151,6 +167,8 @@ function hoge() {
   return [1,2,3].map(fizz)
 }
 ```
+
+### 3.1.8. Step 8
 
 ```js
 // プロダクトコード
