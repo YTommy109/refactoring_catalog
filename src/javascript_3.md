@@ -301,7 +301,7 @@ function raise10(value) {
 // プロダクトコード
 function raise5(value) {
   const multiplier = 5
-  const riase = value * multiplier      // <- 式をローカル変数にします
+  const raise = value * multiplier      // <- 式をローカル変数にします
   return value * multiplier
 }
 function raise10(value) {
@@ -318,7 +318,7 @@ function raise(value, multiplier) {     // <- 式の部分を外部関数にし�
 }                                       // <-
 function raise5(value) {
   const multiplier = 5
-  const riase = value * multiplier
+  const raise = value * multiplier
   return value * multiplier
 }
 function raise10(value) {
@@ -335,11 +335,11 @@ function raise(value, multiplier) {
 }
 function raise5(value) {
   const multiplier = 5
-  const riase = value * multiplier
+  const raise = value * multiplier
   return raise(value, multiplier)       // <- 追加した関数に置き換えます。
 }
 function raise10(value) {
-  return riase(value, 10)               // <- 追加した関数に置き換えます。
+  return raise(value, 10)               // <- 追加した関数に置き換えます。
 }
 ```
 
@@ -369,7 +369,7 @@ function raise(value, multiplier) {
 //   return raise(value, multiplier)  // <-
 // }                                  // <-
 // function raise10(value) {          // <-
-//   return riase(value, 10)          // <-
+//   return raise(value, 10)          // <-
 // }                                  // <-
 ```
 
