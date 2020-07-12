@@ -26,10 +26,16 @@
   - [3.5. 関数の統合](#35-関数の統合)
     - [3.5.1. Step 1 - ローカル変数の導出 1](#351-step-1---ローカル変数の導出-1)
     - [3.5.2. Step 2 - ローカル変数の導出 2](#352-step-2---ローカル変数の導出-2)
-    - [3.5.3. Step 3 - 関数の導出](#353-step-3---関数の導出)
-    - [3.5.4. Step 4 - 新関数の利用](#354-step-4---新関数の利用)
-    - [3.5.5. Step 5 - テストコードを新関数に置き換える](#355-step-5---テストコードを新関数に置き換える)
-    - [3.5.6. Step 6 - 旧関数の削除](#356-step-6---旧関数の削除)
+    - [3.5.3. Step 3 - ローカル変数の利用 3](#353-step-3---ローカル変数の利用-3)
+    - [3.5.4. Step 4 - 関数の導出](#354-step-4---関数の導出)
+    - [3.5.5. Step 5 - 関数の利用](#355-step-5---関数の利用)
+    - [3.5.6. Step 6 - 変数のインライン化](#356-step-6---変数のインライン化)
+    - [3.5.7. Step 7 - 不要変数の削除](#357-step-7---不要変数の削除)
+    - [3.5.8. Step 8 - 変数のインライン化](#358-step-8---変数のインライン化)
+    - [3.5.9. Step 9 - 不要変数の削除](#359-step-9---不要変数の削除)
+    - [3.5.10. Step 10 - 新関数の利用](#3510-step-10---新関数の利用)
+    - [3.5.11. Step 11 - テストコードの新関数への置き換え](#3511-step-11---テストコードの新関数への置き換え)
+    - [3.5.12. Step 12 - 旧関数の削除](#3512-step-12---旧関数の削除)
 
 <!-- /TOC -->
 
@@ -67,7 +73,7 @@ function adhoc(value=0) {   // <- デフォルト値付きで仮引数を追加�
 ### 3.3.2. Step 2 - 仮引数を使用する
 
 ``` js
-// プロダクトコード gen2
+// プロダクトコード
 function adhoc(value=0) {
   return value                // <-　仮引数を使うように変えます。
 }
@@ -76,7 +82,7 @@ function adhoc(value=0) {
 ### 3.3.3. Step 3 - 呼び出し側に引数を追加する
 
 ``` js
-// テストコード gen3
+// テストコード
 it('0 を返すこと', () => {
   expect(adhoc(0)).toBe(0)    // <- 呼び出す側に引数を追加します。
 })
@@ -97,7 +103,7 @@ it('1 を返すこと', () => {      // <- 引数が使われていることを�
 ```
 
 ``` js
-// テストコード gen5
+// テストコード
 it('0 を返すこと', () => {
   expect(adhoc(0)).toBe(0)
 })
@@ -287,8 +293,8 @@ function raise10(value) {
 ```js
 // プロダクトコード
 function raise5(value) {
-  const multiplier = 5                   // <- 直値をローカル変数にします
-  return value * multiplier              // <-
+  const multiplier = 5                  // <- 直値をローカル変数にします
+  return value * multiplier             // <-
 }
 function raise10(value) {
   return value * 10
@@ -301,7 +307,7 @@ function raise10(value) {
 // プロダクトコード
 function raise5(value) {
   const multiplier = 5
-  const raise = value * multiplier      // <- 式をローカル変数にします
+  const ret = value * multiplier        // <- 式をローカル変数にします
   return value * multiplier
 }
 function raise10(value) {
@@ -309,7 +315,21 @@ function raise10(value) {
 }
 ```
 
-### 3.5.3. Step 3 - 関数の導出
+### 3.5.3. Step 3 - ローカル変数の利用 3
+
+```js
+// プロダクトコード
+function raise5(value) {
+  const multiplier = 5
+  const ret = value * multiplier
+  return ret                            // <- 戻り値をローカル変数に変えます
+}
+function raise10(value) {
+  return value * 10
+}
+```
+
+### 3.5.4. Step 4 - 関数の導出
 
 ```js
 // プロダクトコード
@@ -318,15 +338,15 @@ function raise(value, multiplier) {     // <- 式の部分を外部関数にし�
 }                                       // <-
 function raise5(value) {
   const multiplier = 5
-  const raise = value * multiplier
-  return value * multiplier
+  const ret = value * multiplier
+  return ret
 }
 function raise10(value) {
   return value * 10
 }
 ```
 
-### 3.5.4. Step 4 - 新関数の利用
+### 3.5.5. Step 5 - 関数の利用
 
 ```js
 // プロダクトコード
@@ -335,8 +355,89 @@ function raise(value, multiplier) {
 }
 function raise5(value) {
   const multiplier = 5
-  const raise = value * multiplier
-  return raise(value, multiplier)       // <- 追加した関数に置き換えます。
+  const ret = raise(value, multiplier)  // <- 新関数に置き換えます
+  return ret
+}
+function raise10(value) {
+  return value * 10
+}
+```
+
+### 3.5.6. Step 6 - 変数のインライン化
+
+```js
+// プロダクトコード
+function raise(value, multiplier) {
+  return value * multiplier
+}
+function raise5(value) {
+  const multiplier = 5
+  const ret = raise(value, multiplier)
+  return raise(value, multiplier)       // <- 変数をインライン化します
+}
+function raise10(value) {
+  return value * 10
+}
+```
+
+### 3.5.7. Step 7 - 不要変数の削除
+
+```js
+// プロダクトコード
+function raise(value, multiplier) {
+  return value * multiplier
+}
+function raise5(value) {
+  const multiplier = 5
+  // const ret = raise(value, multiplier) // <- 使わなくなった変数を消します
+  return raise(value, multiplier)
+}
+function raise10(value) {
+  return value * 10
+}
+```
+
+### 3.5.8. Step 8 - 変数のインライン化
+
+```js
+// プロダクトコード
+function raise(value, multiplier) {
+  return value * multiplier
+}
+function raise5(value) {
+  const multiplier = 5
+  return raise(value, 5)                // <- 変数のインライン展開します
+}
+function raise10(value) {
+  return value * 10
+}
+```
+
+### 3.5.9. Step 9 - 不要変数の削除
+
+```js
+// プロダクトコード
+function raise(value, multiplier) {
+  return value * multiplier
+}
+function raise5(value) {
+  // const multiplier = 5               // <- 使わなくなった変数を消します
+  return raise(value, 5)
+}
+function raise10(value) {
+  return value * 10
+}
+```
+
+### 3.5.10. Step 10 - 新関数の利用
+
+```js
+// プロダクトコード
+function raise(value, multiplier) {
+  return value * multiplier
+}
+function raise5(value) {
+  return raise(value, 5)                // <- 追加した関数に置き換えます。
 }
 function raise10(value) {
   return raise(value, 10)               // <- 追加した関数に置き換えます。
@@ -345,7 +446,7 @@ function raise10(value) {
 
 旧関数内で新関数を呼んでテストが通れば、新関数の振る舞いを信用できます。そうすれば、安心してテストコードで新関数を利用できます。
 
-### 3.5.5. Step 5 - テストコードを新関数に置き換える
+### 3.5.11. Step 11 - テストコードの新関数への置き換え
 
 ```js
 // テストコード
@@ -357,16 +458,15 @@ it('10 倍になること', () => {
 })
 ```
 
-### 3.5.6. Step 6 - 旧関数の削除
+### 3.5.12. Step 12 - 旧関数の削除
 
 ```js
-// プロダクトコード gen_04
+// プロダクトコード
 function raise(value, multiplier) {
   return value * multiplier
 }
 // function raise5(value) {           // <- 使わなくなった関数を削除します
-//   const multiplier = 5             // <-
-//   return raise(value, multiplier)  // <-
+//   return raise(value, 5)           // <-
 // }                                  // <-
 // function raise10(value) {          // <-
 //   return raise(value, 10)          // <-
