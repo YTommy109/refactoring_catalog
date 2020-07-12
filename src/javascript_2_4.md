@@ -34,7 +34,7 @@ function main(value) {
   } else {
     ans = 'Low'
   }
-  console.log(ans)
+  return ans
 }
 ```
 
@@ -58,7 +58,7 @@ function main(value) {
   } else {
     ans = 'Low'
   }
-  console.log(ans)
+  return ans
 }
 ```
 
@@ -83,7 +83,7 @@ function main(value) {
     ans = 'Low'
   }
   ans = heigAndLow(value)   // <- 関数を使う行を追加します
-  console.log(ans)
+  return ans
 }
 ```
 
@@ -108,7 +108,7 @@ function main(value) {
   //   ans = 'Low'            // <-
   // }                        // <-
   ans = heigAndLow(value)
-  console.log(ans)
+  return ans
 }
 ```
 

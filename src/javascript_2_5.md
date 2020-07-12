@@ -40,7 +40,7 @@ function highAndLow(value) {
   if (isHigh(value)) {
     ans = 'High'
   }
-  console.log(ans)
+  return ans
 }
 ```
 
@@ -61,7 +61,7 @@ function highAndLow(value) {
   if (isHigh(value)) {
     ans = 'High'
   }
-  console.log(ans)
+  return ans
 }
 ```
 
@@ -80,7 +80,7 @@ function highAndLow(value) {
   if (isHigh(value)) {
     ans = 'High'
   }
-  console.log(ans)
+  return ans
 }
 ```
 
@@ -99,7 +99,7 @@ function highAndLow(value) {
   if (value >= 50) {          // <- インライン化します
     ans = 'High'
   }
-  console.log(ans)
+  return ans
 }
 ```
 
@@ -138,6 +138,6 @@ function highAndLow(value) {
   if (value >= 50) {
     ans = 'High'
   }
-  console.log(ans)
+  return ans
 }
 ```
