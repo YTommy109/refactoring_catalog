@@ -1,84 +1,129 @@
-# 2.4. 関数のリネーム
+# 2.4. 関数の導出
 
 <!-- TOC -->
 
-- [2.4. 関数のリネーム](#24-関数のリネーム)
+- [2.4. 関数の導出](#24-関数の導出)
   - [Step 0 - 最初のコード](#step-0---最初のコード)
-  - [Step 1 - 希望名称の関数作成](#step-1---希望名称の関数作成)
-  - [Step 2 - 新関数の利用](#step-2---新関数の利用)
-  - [Step 3 - 旧関数への依存の除去](#step-3---旧関数への依存の除去)
-  - [Step 4 - 旧関数の削除](#step-4---旧関数の削除)
+  - [Step 1 - コピペ関数の作成](#step-1---コピペ関数の作成)
+  - [Step 2 - 関数の利用](#step-2---関数の利用)
+  - [Step 3 - 不使用コードの削除](#step-3---不使用コードの削除)
+  - [Step 4 - テストコードのメンテナンス](#step-4---テストコードのメンテナンス)
 
 <!-- /TOC -->
 
 ## Step 0 - 最初のコード
 
-``` js
+処理が複雑になり、一部を関数に切り出したくなるのはよくあることです。安全に関数を外部に切り出しましょう。
+
+```js
 // テストコード
-it('0 を返すこと', () => {
-  expect(adhoc()).toBe(0)
+it('49 なら Low になること', () => {
+  expect(main(49)).toEqual('Low')
+})
+it('50 なら High になること', () => {
+  expect(main(50)).toEqual('High')
 })
 ```
 
-``` js
-// プロダクトコード org
-function adhoc() {
-  return 0
-}
-```
-
-## Step 1 - 希望名称の関数作成
-
-変更後の名前で、新たな関数として作ります。
-
-``` js
+```js
 // プロダクトコード
-function adhoc() {
-  return 0
-}
-
-function zero() {             // <- 新たに関数を作ります。
-  return adhoc()              // <- 元の関数を呼び出すだけです。
+function main(value) {
+  let ans = null
+  if (value>=50) {
+    ans = 'High'
+  } else {
+    ans = 'Low'
+  }
+  console.log(ans)
 }
 ```
 
-## Step 2 - 新関数の利用
+## Step 1 - コピペ関数の作成
 
-テストコードを直します。
+```js
+// プロダクトコード
+function heigAndLow(value) {  // <- 関数の作成します
+  let ans = null              // <- コピペ
+  if (value>=50) {            // <- コピペ
+    ans = 'High'              // <- コピペ
+  } else {                    // <- コピペ
+    ans = 'Low'               // <- コピペ
+  }                           // <- コピペ
+  return ans                  // <- 結果を返す行を追加します
+}                             // <- 関数の作成
+function main(value) {
+  let ans = null
+  if (value>=50) {
+    ans = 'High'
+  } else {
+    ans = 'Low'
+  }
+  console.log(ans)
+}
+```
 
-``` js
+## Step 2 - 関数の利用
+
+```js
+// プロダクトコード
+function heigAndLow(value) {
+  let ans = null
+  if (value>=50) {
+    ans = 'High'
+  } else {
+    ans = 'Low'
+  }
+  return ans
+}
+function main(value) {
+  let ans = null
+  if (value>=50) {
+    ans = 'High'
+  } else {
+    ans = 'Low'
+  }
+  ans = heigAndLow(value)   // <- 関数を使う行を追加します
+  console.log(ans)
+}
+```
+
+## Step 3 - 不使用コードの削除
+
+```js
+// プロダクトコード
+function heigAndLow(value) {
+  let ans = null
+  if (value>=50) {
+    ans = 'High'
+  } else {
+    ans = 'Low'
+  }
+  return ans
+}
+function main(value) {
+  let ans = null
+  // if (value>=50) {         // <- 使わなくなったので消します。
+  //   ans = 'High'           // <-
+  // } else {                 // <-
+  //   ans = 'Low'            // <-
+  // }                        // <-
+  ans = heigAndLow(value)
+  console.log(ans)
+}
+```
+
+## Step 4 - テストコードのメンテナンス
+
+main は表示するだけで、実質的な処理は highAndLow に移動しているので、テストコードをメンテナンスします。
+
+```js
 // テストコード
-it('0 を返すこと', () => {
-  expect(zero()).toBe(0)      // <- 新たな関数を使います。
+it('49 なら Low になること', () => {
+  expect(heigAndLow(49)).toEqual('Low')  // <- heigAndLow のテストに変えます
 })
-```
-
-## Step 3 - 旧関数への依存の除去
-
-プロダクトコードを直します。
-
-``` js
-// プロダクトコード
-function adhoc() {
-  return 0
-}
-
-function zero() {
-  return 0                    // <- 元の adhoc 関数の中身を移します。
-}
-```
-
-## Step 4 - 旧関数の削除
-
-``` js
-// プロダクトコード
-// function adhoc() {         // <- 使わなくなった関数を消します。
-//   return 0                 //
-// }                          //
-
-function zero() {
-  return 0
-}
+it('50 なら High になること', () => {
+  expect(heigAndLow(50)).toEqual('High')  // <- heigAndLow のテストに変えます
+})
 ```
 
 ---
