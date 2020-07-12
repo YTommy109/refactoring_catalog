@@ -1,4 +1,6 @@
-# 2. 初級 - JavaScript
+# 3.1. 関数導出
+
+Comming soon...
 
 ---
 

@@ -34,4 +34,4 @@
 
 ---
 
-&copy; 2020 Tommy@degino Inc.
+&copy; 2020 Tommy@[Degino Inc.](https://www.degino.com/)

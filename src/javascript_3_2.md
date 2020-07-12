@@ -1,4 +1,6 @@
-# 2. 初級 - JavaScript
+# 3.2. 関数のインライン化
+
+Comming soon...
 
 ---
 
