@@ -35,7 +35,6 @@ it('50 なら High になること', () => {
 function isHigh(v) {
   return v >= 50
 }
-
 function highAndLow(value) {
   let ans = 'Low'
   if (isHigh(value)) {
@@ -57,7 +56,6 @@ function isHigh(v) {
   const value = v             // <- 変数を用意します
   return v >= 50
 }
-
 function highAndLow(value) {
   let ans = 'Low'
   if (isHigh(value)) {
@@ -77,7 +75,6 @@ function isHigh(v) {
   const value = v
   return value >= 50          // <- 作成した変数に切り替えます
 }
-
 function highAndLow(value) {
   let ans = 'Low'
   if (isHigh(value)) {
@@ -97,7 +94,6 @@ function isHigh(v) {
   const value = v
   return value >= 50
 }
-
 function highAndLow(value) {
   let ans = 'Low'
   if (value >= 50) {          // <- インライン化します
@@ -117,7 +113,7 @@ function highAndLow(value) {
 //   expect(isHigh(49)).toBe(false)       // <-
 // })                                     // <-
 // it('50 なら true になること', () => {    // <-
-//   expect(isHigh(50)).toBe(true)        // <- 
+//   expect(isHigh(50)).toBe(true)        // <-
 // })                                     // <-
 it('49 なら Low になること', () => {
   expect(heigAndLow(49)).toEqual('Low')
@@ -137,7 +133,6 @@ it('50 なら High になること', () => {
 //   const value = v          //
 //   return value >= 50       //
 // }                          //
-
 function highAndLow(value) {
   let ans = 'Low'
   if (value >= 50) {
