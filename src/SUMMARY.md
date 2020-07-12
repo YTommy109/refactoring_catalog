@@ -1,6 +1,6 @@
 # Summary
 
-- [Refactoring とは](./chapter_1.md)
+- [Refactoring カタログ](./chapter_1.md)
 - [初級 - JavaScript](./javascript_2.md)
   - [ローカル変数導出](./javascript_2_1.md)
   - [変数のインライン化](./javascript_2_2.md)
