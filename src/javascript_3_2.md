@@ -86,7 +86,7 @@ function square_new(size) {
 ``` js
 // テストコード
 it('正方形の面積を求める', () => {
-  expect(square_new(5) + ' ㎡')).toBe('25 ㎡')  // <- 新しい関数に置き換えます
+  expect(square_new(5) + ' ㎡').toBe('25 ㎡')  // <- 新しい関数に置き換えます
 })
 ```
 
@@ -121,7 +121,7 @@ function square_new(size) {
 ``` js
 // テストコード
 it('正方形の面積を求める', () => {
-  expect(square(5) + ' ㎡')).toBe('25 ㎡')  // <- 新しい関数に置き換えます
+  expect(square(5) + ' ㎡').toBe('25 ㎡')  // <- 新しい関数に置き換えます
 })
 ```
 
@@ -144,7 +144,7 @@ function square_new(size) {
 ``` js
 // プロダクトコード
 function square(size) {
-  return size * sizeす
+  return size * size
 }
 // function square_new(size) {  // <- 使わないので消します
 //   return size * size         // <-
@@ -156,7 +156,7 @@ function square(size) {
 ``` js
 // テストコード
 it('正方形の面積を求める', () => {
-  expect(square(5))).toBe('25')  // <- テストを適切な内容に変えます
+  expect(square(5)).toBe(25)  // <- テストを適切な内容に変えます
 })
 ```
 
