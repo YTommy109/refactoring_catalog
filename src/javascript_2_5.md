@@ -23,10 +23,10 @@ it('50 なら true になること', () => {
   expect(isHigh(50)).toBe(true)
 })
 it('49 なら Low になること', () => {
-  expect(heigAndLow(49)).toEqual('Low')
+  expect(highAndLow(49)).toEqual('Low')
 })
 it('50 なら High になること', () => {
-  expect(heigAndLow(50)).toEqual('High')
+  expect(highAndLow(50)).toEqual('High')
 })
 ```
 
@@ -124,8 +124,6 @@ it('50 なら High になること', () => {
 ```
 
 ## Step 5 - 不使用関数の削除
-
-インライン化してもエラーが出ないように、事前に変数名に合わせておきます。
 
 ```js
 // プロダクトコード
