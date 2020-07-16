@@ -23,10 +23,10 @@ it('50 なら true になること', () => {
   expect(isHigh(50)).toBe(true)
 })
 it('49 なら Low になること', () => {
-  expect(heigAndLow(49)).toEqual('Low')
+  expect(highAndLow(49)).toEqual('Low')
 })
 it('50 なら High になること', () => {
-  expect(heigAndLow(50)).toEqual('High')
+  expect(highAndLow(50)).toEqual('High')
 })
 ```
 
@@ -48,8 +48,6 @@ function highAndLow(value) {
 
 ## Step 1 - 変数名を同期 1
 
-インライン化してもエラーが出ないように、事前に変数名に合わせておきます。
-
 ```js
 // プロダクトコード
 function isHigh(v) {
@@ -67,8 +65,6 @@ function highAndLow(value) {
 
 ## Step 2 - 変数名を同期 2
 
-インライン化してもエラーが出ないように、事前に変数名に合わせておきます。
-
 ```js
 // プロダクトコード
 function isHigh(v) {
@@ -85,8 +81,6 @@ function highAndLow(value) {
 ```
 
 ## Step 3 - 関数のインライン化
-
-インライン化してもエラーが出ないように、事前に変数名に合わせておきます。
 
 ```js
 // プロダクトコード
@@ -116,16 +110,14 @@ function highAndLow(value) {
 //   expect(isHigh(50)).toBe(true)        // <-
 // })                                     // <-
 it('49 なら Low になること', () => {
-  expect(heigAndLow(49)).toEqual('Low')
+  expect(highAndLow(49)).toEqual('Low')
 })
 it('50 なら High になること', () => {
-  expect(heigAndLow(50)).toEqual('High')
+  expect(highAndLow(50)).toEqual('High')
 })
 ```
 
 ## Step 5 - 不使用関数の削除
-
-インライン化してもエラーが出ないように、事前に変数名に合わせておきます。
 
 ```js
 // プロダクトコード
