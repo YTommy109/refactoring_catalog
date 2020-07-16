@@ -6,7 +6,7 @@
   - [変数のインライン化](./javascript_2_2.md)
   - [変数のリネーム](./javascript_2_3.md)
   - [関数の導出 - 変数名の同期](./javascript_2_4.md)
-  - [関数の導出 - 依存変数の局所化](./javascript_2_5.md)
+  - [関数の導出 - 依存変数の切り離し](./javascript_2_5.md)
   - [関数のインライン化](./javascript_2_6.md)
   - [関数のリネーム](./javascript_2_7.md)
 - [中級 - JavaScript](./javascript_3.md)
