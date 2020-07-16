@@ -42,14 +42,14 @@ function main(value) {
 
 ```js
 // プロダクトコード
-function heigAndLow(value) {  // <- 関数の作成します
+function highAndLow(value) {  // <- 関数を作成します
   let ans = null              // <- コピペ
   if (value>=50) {            // <- コピペ
     ans = 'High'              // <- コピペ
   } else {                    // <- コピペ
     ans = 'Low'               // <- コピペ
   }                           // <- コピペ
-  return ans                  // <- 結果を返す行を追加します
+  return ans                  // <- コピペ
 }                             // <- 関数の作成
 function main(value) {
   let ans = null
@@ -66,7 +66,7 @@ function main(value) {
 
 ```js
 // プロダクトコード
-function heigAndLow(value) {
+function highAndLow(value) {
   let ans = null
   if (value>=50) {
     ans = 'High'
@@ -82,7 +82,7 @@ function main(value) {
   } else {
     ans = 'Low'
   }
-  ans = heigAndLow(value)   // <- 関数を使う行を追加します
+  ans = highAndLow(value)   // <- 関数を使う行を追加します
   return ans
 }
 ```
@@ -91,7 +91,7 @@ function main(value) {
 
 ```js
 // プロダクトコード
-function heigAndLow(value) {
+function highAndLow(value) {
   let ans = null
   if (value>=50) {
     ans = 'High'
@@ -107,7 +107,7 @@ function main(value) {
   // } else {                 // <-
   //   ans = 'Low'            // <-
   // }                        // <-
-  ans = heigAndLow(value)
+  ans = highAndLow(value)
   return ans
 }
 ```
@@ -119,10 +119,10 @@ main は表示するだけで、実質的な処理は highAndLow に移動して
 ```js
 // テストコード
 it('49 なら Low になること', () => {
-  expect(heigAndLow(49)).toEqual('Low')  // <- heigAndLow のテストに変えます
+  expect(highAndLow(49)).toEqual('Low')  // <- highAndLow のテストに変えます
 })
 it('50 なら High になること', () => {
-  expect(heigAndLow(50)).toEqual('High')  // <- heigAndLow のテストに変えます
+  expect(highAndLow(50)).toEqual('High')  // <- highAndLow のテストに変えます
 })
 ```
 
