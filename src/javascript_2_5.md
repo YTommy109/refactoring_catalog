@@ -1,14 +1,15 @@
-# 2.5. 関数のインライン化
+# 2.5. 関数の導出 - 依存変数の局所化
 
 <!-- TOC -->
 
-- [2.5. 関数のインライン化](#25-関数のインライン化)
+- [2.5. 関数の導出 - 依存変数の局所化](#25-関数の導出---依存変数の局所化)
   - [Step 0 - 最初のコード](#step-0---最初のコード)
-  - [Step 1 - 変数名を同期 1](#step-1---変数名を同期-1)
-  - [Step 2 - 変数名を同期 2](#step-2---変数名を同期-2)
-  - [Step 3 - 関数のインライン化](#step-3---関数のインライン化)
-  - [Step 4 - テストコードの削除](#step-4---テストコードの削除)
-  - [Step 5 - 不使用関数の削除](#step-5---不使用関数の削除)
+  - [Step 1 - 一時変数の作成](#step-1---一時変数の作成)
+  - [Step 2 - 一時変数の利用](#step-2---一時変数の利用)
+  - [Step 3 - 不使用部分の削除](#step-3---不使用部分の削除)
+  - [Step 4 - 関数の導出](#step-4---関数の導出)
+  - [Step 5 - 新規関数の利用](#step-5---新規関数の利用)
+  - [Step 6 - 不使用箇所の削除](#step-6---不使用箇所の削除)
 
 <!-- /TOC -->
 
@@ -16,128 +17,181 @@
 
 ```js
 // テストコード
-it('49 なら false になること', () => {
-  expect(isHigh(49)).toBe(false)
-})
-it('50 なら true になること', () => {
-  expect(isHigh(50)).toBe(true)
-})
-it('49 なら Low になること', () => {
-  expect(heigAndLow(49)).toEqual('Low')
-})
-it('50 なら High になること', () => {
-  expect(heigAndLow(50)).toEqual('High')
+it('1から3までの FizzBuzz を取れること', () => {
+  expect(fizzbuzz(), [1, 2, 'Fizz'])
 })
 ```
 
 ```js
 // プロダクトコード
-function isHigh(v) {
-  return v >= 50
-}
-function highAndLow(value) {
-  let ans = 'Low'
-  if (isHigh(value)) {
-    ans = 'High'
+function fizzbuzz() {
+  const ret = []
+  for (let i=1; i<=3; i++) {
+    if (i===3) {
+      ret[i-1] = 'Fizz'
+    } else {
+      ret[i-1] = String(i)
+    }
   }
-  return ans
+
+  return ret
 }
 ```
 
-リファクタリングを進めた結果、とてもシンプルな関数に整理され、独立した関数にしておくことが適切ではなくなった…。そんな時は、インライン化しましょう。
-
-## Step 1 - 変数名を同期 1
-
-インライン化してもエラーが出ないように、事前に変数名に合わせておきます。
+## Step 1 - 一時変数の作成
 
 ```js
 // プロダクトコード
-function isHigh(v) {
-  const value = v             // <- 変数を用意します
-  return v >= 50
-}
-function highAndLow(value) {
-  let ans = 'Low'
-  if (isHigh(value)) {
-    ans = 'High'
+function fizzbuzz() {
+  const ret = []
+  for (let i=1; i<=3; i++) {
+    let temp = null                     // <- 一時変数を作成します
+    if (i===3) {
+      temp = 'Fizz'                     // <- 一時変数に代入します
+      ret[i-1] = 'Fizz'
+    } else {
+      temp = String(i)                  // <- 一時変数に代入します
+      ret[i-1] = String(i)
+    }
   }
-  return ans
+
+  return ret
 }
 ```
 
-## Step 2 - 変数名を同期 2
-
-インライン化してもエラーが出ないように、事前に変数名に合わせておきます。
+## Step 2 - 一時変数の利用
 
 ```js
 // プロダクトコード
-function isHigh(v) {
-  const value = v
-  return value >= 50          // <- 作成した変数に切り替えます
-}
-function highAndLow(value) {
-  let ans = 'Low'
-  if (isHigh(value)) {
-    ans = 'High'
+function fizzbuzz() {
+  const ret = []
+  for (let i=1; i<=3; i++) {
+    let temp = null
+    if (i===3) {
+      temp = 'Fizz'
+      ret[i-1] = 'Fizz'
+    } else {
+      temp = String(i)
+      ret[i-1] = String(i)
+    }
+    ret[i-1] = temp                     // <- 一次変数を使用します
   }
-  return ans
+
+  return ret
 }
 ```
 
-## Step 3 - 関数のインライン化
-
-インライン化してもエラーが出ないように、事前に変数名に合わせておきます。
+## Step 3 - 不使用部分の削除
 
 ```js
 // プロダクトコード
-function isHigh(v) {
-  const value = v
-  return value >= 50
-}
-function highAndLow(value) {
-  let ans = 'Low'
-  if (value >= 50) {          // <- インライン化します
-    ans = 'High'
+function fizzbuzz() {
+  const ret = []
+  for (let i=1; i<=3; i++) {
+    let temp = null
+    if (i===3) {
+      temp = 'Fizz'
+      // ret[i-1] = 'Fizz'              // <- 使わなくなったので消します
+    } else {
+      temp = String(i)
+      // ret[i-1] = String(i)           // <- 使わなくなったので消します
+    }
+    ret[i-1] = temp
   }
-  return ans
+
+  return ret
 }
 ```
 
-## Step 4 - テストコードの削除
-
-もう isHigh のテストは不要です。
-
-```js
-// テストコード
-// it('49 なら false になること', () => {   // <- 消します
-//   expect(isHigh(49)).toBe(false)       // <-
-// })                                     // <-
-// it('50 なら true になること', () => {    // <-
-//   expect(isHigh(50)).toBe(true)        // <-
-// })                                     // <-
-it('49 なら Low になること', () => {
-  expect(heigAndLow(49)).toEqual('Low')
-})
-it('50 なら High になること', () => {
-  expect(heigAndLow(50)).toEqual('High')
-})
-```
-
-## Step 5 - 不使用関数の削除
-
-インライン化してもエラーが出ないように、事前に変数名に合わせておきます。
+## Step 4 - 関数の導出
 
 ```js
 // プロダクトコード
-// function isHigh(v) {       // <- 消します
-//   const value = v          //
-//   return value >= 50       //
-// }                          //
-function highAndLow(value) {
-  let ans = 'Low'
-  if (value >= 50) {
-    ans = 'High'
+function hantei(i) {                    // <- 新規作成を作成します
+    let temp = null                     // <- コピペ
+    if (i===3) {                        // <- コピペ
+      temp = 'Fizz'                     // <- コピペ
+    } else {                            // <- コピペ
+      temp = String(i)                  // <- コピペ
+    }                                   // <- コピペ
+                                        // <- コピペ
+    return temp                         // <- コピペ
+}                                       // <- 新規作成を作成します
+
+function fizzbuzz() {
+  const ret = []
+  for (let i=1; i<=3; i++) {
+    let temp = null
+    if (i===3) {
+      temp = 'Fizz'
+    } else {
+      temp = String(i)
+    }
+    ret[i-1] = temp
   }
-  return ans
+
+  return ret
+}
+```
+
+## Step 5 - 新規関数の利用
+
+```js
+// プロダクトコード
+function hantei() {
+    let temp = null
+    if (i===3) {
+      temp = 'Fizz'
+    } else {
+      temp = String(i)
+    }
+
+    return temp
+}
+
+function fizzbuzz() {
+  const ret = []
+  for (let i=1; i<=3; i++) {
+    let temp = null
+    if (i===3) {
+      temp = 'Fizz'
+    } else {
+      temp = String(i)
+    }
+    ret[i-1] = hantei(i)                // <- 作成関数を利用する
+  }
+
+  return ret
+}
+```
+
+## Step 6 - 不使用箇所の削除
+
+```js
+// プロダクトコード
+function hantei() {
+    let temp = null
+    if (i===3) {
+      temp = 'Fizz'
+    } else {
+      temp = String(i)
+    }
+
+    return temp
+}
+
+function fizzbuzz() {
+  const ret = []
+  for (let i=1; i<=3; i++) {
+    // let temp = null                  // <- 使わなくなったところを消します
+    // if (i===3) {                     // <-
+    //   temp = 'Fizz'                  // <-
+    // } else {                         // <-
+    //   temp = String(i)               // <-
+    // }                                // <-
+    ret[i-1] = hantei(i)
+  }
+
+  return ret
 }
 ```

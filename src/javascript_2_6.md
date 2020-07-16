@@ -1,86 +1,143 @@
-# 2.6. 関数のリネーム
+# 2.6. 関数のインライン化
 
 <!-- TOC -->
 
-- [2.6. 関数のリネーム](#26-関数のリネーム)
+- [2.6. 関数のインライン化](#26-関数のインライン化)
   - [Step 0 - 最初のコード](#step-0---最初のコード)
-  - [Step 1 - 希望名称の関数作成](#step-1---希望名称の関数作成)
-  - [Step 2 - 新関数の利用](#step-2---新関数の利用)
-  - [Step 3 - 旧関数への依存の除去](#step-3---旧関数への依存の除去)
-  - [Step 4 - 旧関数の削除](#step-4---旧関数の削除)
+  - [Step 1 - 変数名を同期 1](#step-1---変数名を同期-1)
+  - [Step 2 - 変数名を同期 2](#step-2---変数名を同期-2)
+  - [Step 3 - 関数のインライン化](#step-3---関数のインライン化)
+  - [Step 4 - テストコードの削除](#step-4---テストコードの削除)
+  - [Step 5 - 不使用関数の削除](#step-5---不使用関数の削除)
 
 <!-- /TOC -->
 
 ## Step 0 - 最初のコード
 
-``` js
+```js
 // テストコード
-it('0 を返すこと', () => {
-  expect(adhoc()).toBe(0)
+it('49 なら false になること', () => {
+  expect(isHigh(49)).toBe(false)
+})
+it('50 なら true になること', () => {
+  expect(isHigh(50)).toBe(true)
+})
+it('49 なら Low になること', () => {
+  expect(heigAndLow(49)).toEqual('Low')
+})
+it('50 なら High になること', () => {
+  expect(heigAndLow(50)).toEqual('High')
 })
 ```
 
-``` js
-// プロダクトコード org
-function adhoc() {
-  return 0
-}
-```
-
-## Step 1 - 希望名称の関数作成
-
-変更後の名前で、新たな関数として作ります。
-
-``` js
+```js
 // プロダクトコード
-function adhoc() {
-  return 0
+function isHigh(v) {
+  return v >= 50
 }
-
-function zero() {             // <- 新たに関数を作ります。
-  return adhoc()              // <- 元の関数を呼び出すだけです。
+function highAndLow(value) {
+  let ans = 'Low'
+  if (isHigh(value)) {
+    ans = 'High'
+  }
+  return ans
 }
 ```
 
-## Step 2 - 新関数の利用
+リファクタリングを進めた結果、とてもシンプルな関数に整理され、独立した関数にしておくことが適切ではなくなった…。そんな時は、インライン化しましょう。
 
-テストコードを直します。
+## Step 1 - 変数名を同期 1
 
-``` js
+インライン化してもエラーが出ないように、事前に変数名に合わせておきます。
+
+```js
+// プロダクトコード
+function isHigh(v) {
+  const value = v             // <- 変数を用意します
+  return v >= 50
+}
+function highAndLow(value) {
+  let ans = 'Low'
+  if (isHigh(value)) {
+    ans = 'High'
+  }
+  return ans
+}
+```
+
+## Step 2 - 変数名を同期 2
+
+インライン化してもエラーが出ないように、事前に変数名に合わせておきます。
+
+```js
+// プロダクトコード
+function isHigh(v) {
+  const value = v
+  return value >= 50          // <- 作成した変数に切り替えます
+}
+function highAndLow(value) {
+  let ans = 'Low'
+  if (isHigh(value)) {
+    ans = 'High'
+  }
+  return ans
+}
+```
+
+## Step 3 - 関数のインライン化
+
+インライン化してもエラーが出ないように、事前に変数名に合わせておきます。
+
+```js
+// プロダクトコード
+function isHigh(v) {
+  const value = v
+  return value >= 50
+}
+function highAndLow(value) {
+  let ans = 'Low'
+  if (value >= 50) {          // <- インライン化します
+    ans = 'High'
+  }
+  return ans
+}
+```
+
+## Step 4 - テストコードの削除
+
+もう isHigh のテストは不要です。
+
+```js
 // テストコード
-it('0 を返すこと', () => {
-  expect(zero()).toBe(0)      // <- 新たな関数を使います。
+// it('49 なら false になること', () => {   // <- 消します
+//   expect(isHigh(49)).toBe(false)       // <-
+// })                                     // <-
+// it('50 なら true になること', () => {    // <-
+//   expect(isHigh(50)).toBe(true)        // <-
+// })                                     // <-
+it('49 なら Low になること', () => {
+  expect(heigAndLow(49)).toEqual('Low')
+})
+it('50 なら High になること', () => {
+  expect(heigAndLow(50)).toEqual('High')
 })
 ```
 
-## Step 3 - 旧関数への依存の除去
+## Step 5 - 不使用関数の削除
 
-プロダクトコードを直します。
+インライン化してもエラーが出ないように、事前に変数名に合わせておきます。
 
-``` js
+```js
 // プロダクトコード
-function adhoc() {
-  return 0
-}
-
-function zero() {
-  return 0                    // <- 元の adhoc 関数の中身を移します。
-}
-```
-
-## Step 4 - 旧関数の削除
-
-``` js
-// プロダクトコード
-// function adhoc() {         // <- 使わなくなった関数を消します。
-//   return 0                 //
+// function isHigh(v) {       // <- 消します
+//   const value = v          //
+//   return value >= 50       //
 // }                          //
-
-function zero() {
-  return 0
+function highAndLow(value) {
+  let ans = 'Low'
+  if (value >= 50) {
+    ans = 'High'
+  }
+  return ans
 }
 ```
-
----
-
-&copy; 2020 Tommy@[Degino Inc.](https://www.degino.com/)
