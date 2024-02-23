@@ -8,7 +8,7 @@
   - [関数の導出 - 変数名の同期](./javascript_2_4.md)
   - [関数の導出 - 依存変数の切り離し](./javascript_2_5.md)
   - [関数のインライン化](./javascript_2_6.md)
-  - [関数のリネーム](./javascript_2_7.md)
+  - [関数宣言の変更 - メソッド名の変更](./javascript_2_7.md)
 - [中級 - JavaScript](./javascript_3.md)
   - [関数の仮引数の追加](./javascript_3_1.md)
   - [関数の仮引数の変更](./javascript_3_2.md)

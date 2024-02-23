@@ -1,5 +1,7 @@
 # 2.6. 関数のインライン化
 
+英語名: [Inline Function](https://refactoring.com/catalog/inlineFunction.html)
+
 <!-- TOC -->
 
 - [2.6. 関数のインライン化](#26-関数のインライン化)

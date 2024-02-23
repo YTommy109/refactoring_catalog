@@ -1,5 +1,7 @@
 # 2.3. 変数のリネーム
 
+英語名: [Rename Variable](https://refactoring.com/catalog/renameVariable.html)
+
 <!-- TOC -->
 
 - [2.3. 変数のリネーム](#23-変数のリネーム)

@@ -1,8 +1,10 @@
-# 2.7. 関数のリネーム
+# 2.7. 関数宣言の変更 - メソッド名の変更
+
+英語名: [Change Function Declaration](https://refactoring.com/catalog/changeFunctionDeclaration.html)
 
 <!-- TOC -->
 
-- [2.7. 関数のリネーム](#27-関数のリネーム)
+- [2.7. 関数のリネーム](#27-関数宣言の変更---メソッド名の変更)
   - [Step 0 - 最初のコード](#step-0---最初のコード)
   - [Step 1 - 希望名称の関数作成](#step-1---希望名称の関数作成)
   - [Step 2 - 新関数の利用](#step-2---新関数の利用)

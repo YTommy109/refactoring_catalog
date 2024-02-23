@@ -1,5 +1,7 @@
 # 2.1. 変数の導出
 
+英語名:  ([Extract Variable](https://refactoring.com/catalog/extractVariable.html))
+
 <!-- TOC -->
 
 - [2.1. 変数の導出](#21-変数の導出)

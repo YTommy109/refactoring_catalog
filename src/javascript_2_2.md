@@ -1,5 +1,7 @@
 # 2.2. 変数のインライン化
 
+英語名: [Inline Variable](https://refactoring.com/catalog/inlineVariable.html)
+
 <!-- TOC -->
 
 - [2.2. 変数のインライン化](#22-変数のインライン化)
