@@ -26,7 +26,7 @@ it('半径 2 の円の面積が 12.56 であること', () => {
 // プロダクトコード
 function menseki(r) {
   const pi = 3.14
-  const ret = r*r*3.14
+  const ret = r*r*pi
   return ret
 }
 ```
